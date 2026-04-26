@@ -1,8 +1,9 @@
-name: Test
-on:
-  workflow_dispatch:
+name: Fix
+on: [push, workflow_dispatch]
+permissions: {contents: write}
 jobs:
-  test:
+  p:
     runs-on: ubuntu-latest
     steps:
-      - run: echo ok
+      - uses: actions/checkout@v4
+      - run: node fix.js && git config user.name bot && git config user.email bot@github.com && git add server.js && git commit -m fix-admin || true && git push
