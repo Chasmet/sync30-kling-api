@@ -1,1 +1,2 @@
-test
+import crypto from "crypto";
+const ADMIN_EMAIL_HASHES = ["dde7cda679af9cea592785eaf6501dd759082bcea0c830fcc94ea167851e7c3d"];
