@@ -1,6 +1,6 @@
 {
   "name": "sync30-kling-api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Backend Sync-up avec Supabase",
   "main": "server.js",
   "type": "module",
