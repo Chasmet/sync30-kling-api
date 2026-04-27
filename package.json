@@ -1,11 +1,11 @@
 {
   "name": "sync30-kling-api",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Backend Sync-up avec Supabase",
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "sed -i 's/return true;return true;/return xAdmin === \"true\" || ADMIN_USER_IDS.includes(userId);/' server.js && node server.js"
+    "start": "node -e \"const fs=require('fs');let s=fs.readFileSync('server.js','utf8');s=s.replace('if(xAdmin===\\\"true\\\"||ADMIN_USER_IDS.includes(userId))return true;return true;','if(xAdmin===\\\"true\\\"||ADMIN_USER_IDS.includes(userId))return true;return false;');fs.writeFileSync('server.js',s)\" && node server.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.8",
